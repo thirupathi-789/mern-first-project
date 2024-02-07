@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 const userRoutes = require('./routes/user.routes.js');
+const authRoutes = require('./routes/auth.route.js')
 
 mongoose.connect(process.env.MONGO).then(
     () => {console.log('MongoDb is connected')}
@@ -18,6 +19,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/user', userRoutes)
+app.use('/api/auth', authRoutes)
 
 app.listen(3002, () => {
     console.log('Server is running on port 3002!!');

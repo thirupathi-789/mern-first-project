@@ -4,6 +4,8 @@ const dotenv = require('dotenv')
 
 dotenv.config();
 
+const userRoutes = require('./routes/user.routes.js');
+
 mongoose.connect(process.env.MONGO).then(
     () => {console.log('MongoDb is connected')}
 )
@@ -13,6 +15,10 @@ mongoose.connect(process.env.MONGO).then(
 
 const app = express();
 
-app.listen(3001, () => {
-    console.log('Server is running on port 3001!!');
+app.use(express.json());
+
+app.use('/api/user', userRoutes)
+
+app.listen(3002, () => {
+    console.log('Server is running on port 3002!!');
 });

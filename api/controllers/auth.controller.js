@@ -1,15 +1,15 @@
-const { default: User } = require("../models/user.model");
-const bcrypt = require('bcryptjs');
-const errorHandler = require("../utls/error");
+import User from '../models/user.model.js'
+import bcryptjs from 'bcryptjs';
+import {errorHandler} from "../utls/error.js";
 
 const signup = async (req, res, next) => {
-    const {username, password, email} = req.body;
+    const { username, password, email } = req.body;
 
-    if (!username || !password || !email || username==='' || password==='' || email==='') {
+    if (!username || !password || !email || username === '' || password === '' || email === '') {
         next(errorHandler(400, 'All fields are required'))
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = bcryptjs.hashSync(password, 10)
 
     const newUser = new User({
         username,
@@ -19,14 +19,10 @@ const signup = async (req, res, next) => {
 
     try {
         await newUser.save();
-    res.json("SignUp successfull")
+        res.json("SignUp successfull");
     }
     catch (error) {
-        next(error)
-    }
-
-    
-
+        next(error)    }
 }
 
-module.exports = signup
+export default signup

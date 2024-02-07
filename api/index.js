@@ -1,11 +1,11 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv')
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-const userRoutes = require('./routes/user.routes.js');
-const authRoutes = require('./routes/auth.route.js')
+import userRoutes from './routes/user.routes.js';
+import authRoutes from './routes/auth.route.js';
 
 mongoose.connect(process.env.MONGO).then(
     () => {console.log('MongoDb is connected')}
@@ -31,6 +31,6 @@ app.use((err, req, res, next) => {
 })
 })
 
-app.listen(3002, () => {
-    console.log('Server is running on port 3002!!');
+app.listen(3000, () => {
+    console.log('Server is running on port 3000!!');
 });

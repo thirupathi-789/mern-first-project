@@ -1,7 +1,7 @@
 import User from '../models/user.model.js'
 import bcryptjs from 'bcryptjs';
 import {errorHandler} from "../utls/error.js";
-import pkg from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 export const signup = async (req, res, next) => {
     const { username, password, email } = req.body;
@@ -28,7 +28,7 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
     const {email, password} = req.body;
-    const {jwt} = pkg;
+    
 
     if (!email || !password || email === '' || password === '') {
         next(errorHandler(400, "All fields are required"));
